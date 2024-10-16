@@ -30,9 +30,13 @@ def main_options() -> None:
             input_values = values.split(" ")
             x = float(input_values[0])
             y = float(input_values[1])
+            
          except ValueError:
-            print("Invalid input. Please enter a number")
+            print(Fore.RED + "Invalid input. Please enter a number")
             continue
+         
+         finally:
+            print(Style.RESET_ALL)
          
          basic_calcs(selected_option, x, y)
       
@@ -43,9 +47,13 @@ def main_options() -> None:
          if selected_option in (1, 2):
             try:
                values = input("Set f(x) = ")
+               
             except ValueError:
-               print("Invalid input. Please enter a number")
-            continue
+               print(Fore.RED + "Invalid input. Please enter a number")
+               continue
+            
+            finally:
+               print(Style.RESET_ALL)
          
          advanced_calcs(selected_option, values)
          
@@ -56,27 +64,36 @@ def main_options() -> None:
 
 
 def basic_calcs(selected_option: int, x: float, y: float) -> None:
+   try:
+      
+      match selected_option:
+               case 1:
+                  result = add(x, y)
+                  print(Fore.GREEN + f"Result: {x} + {y} = {result}")
+               case 2:
+                  result = sub(x, y)
+                  print(Fore.GREEN + f"Result: {x} - {y} = {result}")
+               case 3:
+                  result = div(x, y)
+                  print(Fore.GREEN + f"Result: {x} / {y} = {result}")
+               case 4:
+                  result= mult(x, y)
+                  print(Fore.GREEN + f"Result: {x} * {y} = {result}")
+               case 5:
+                  result = exp(x, y)
+                  print(Fore.GREEN + f"Result: {x} ^ {y} = {result}")
+                  
+   except ZeroDivisionError as e:
+      print(Fore.RED + str(e))
+      
+   finally:
+      print(Style.RESET_ALL)
+      
+def advanced_calcs(selected_option: int, expression: str) -> None:
    
    match selected_option:
-      
-            case 1:
-               result = add(x, y)
-               print(Fore.GREEN + f"Result: {x} + {y} = {result}")
-            case 2:
-               result = sub(x, y)
-               print(Fore.GREEN + f"Result: {x} - {y} = {result}")
-            case 3:
-               result = div(x, y)
-               print(Fore.GREEN + f"Result: {x} / {y} = {result}")
-            case 4:
-               result= mult(x, y)
-               print(Fore.GREEN + f"Result: {x} * {y} = {result}")
-            case 5:
-               result = exp(x, y)
-               print(Fore.GREEN + f"Result: {x} ^ {y} = {result}")
-            
-   print(Style.RESET_ALL)
-   
-def advanced_calcs(selected_option: int, expression: str) -> None:
-   result = poly_deriv(expression)
-   print(Fore.GREEN + f"Result: f(x) = {expression} --> f'(x) = {result}")
+      case 1:
+         result = poly_deriv(expression)
+         print(Fore.GREEN + f"Result: f(x) = {expression} --> f'(x) = {result}")
+      case 2:
+         print("Not defined yet")

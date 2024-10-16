@@ -11,8 +11,6 @@ def mult(x: float, y: float) -> float:
     return x * y
 
 def div(x: float, y: float) -> float:
-    if y == 0:
-        raise ValueError("Can't divide by 0")
     return x / y
 
 def exp(x: float, y: float) -> float:
