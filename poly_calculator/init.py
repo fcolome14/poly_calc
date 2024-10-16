@@ -26,7 +26,11 @@ def main_options() -> None:
       
       if selected_option in (1, 2, 3, 4, 5):
          try:
+            
             values = input("Now set both numbers separated by a space (x y): ")
+            if len(values.split(" ")) != 2:
+               raise ValueError
+
             input_values = values.split(" ")
             x = float(input_values[0])
             y = float(input_values[1])
